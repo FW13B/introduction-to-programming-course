@@ -24,14 +24,26 @@ def assess_scene(scene, max_cloud):
 
 def review_scenes(records, max_cloud):
     """Return a new scene_id/status dictionary for every input record."""
-    results = []
     # TASK C2: write a loop that assesses each scene and appends its result.
+    results = []
+    for scene in records:
+        results.append({scene["scene_id"] : assess_scene(scene,MAX_CLOUD)})
+
     return results
 
 
 def summarize_results(results):
     """Count the stored statuses, including three zero counts for empty input."""
     counts = {"ELIGIBLE": 0, "CLOUDY": 0, "INVALID": 0}
+
+    for element in results:
+        if results["status"] == "ELIGIBLE":
+            counts["ELIGIBLE"] += 1
+        elif results["status"] == "CLOUDY":
+            counts["CLOUDY"] += 1
+        else:
+            counts["INVALID"] += 1
+
     # TASK C3: write a loop that counts the status in each result dictionary.
     return counts
 
